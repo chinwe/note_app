@@ -1,0 +1,12 @@
+<html>
+<a href="/">Home</a>
+<h1>Notes<h1>
+<body>
+  {% for note in notes %}
+  <h2>{{note.title}}</h2>
+  <p>{{note.timestamp}}</p>
+  <p>{{note.body}}</p>
+  <br/>
+  {% endfor %}
+</body>
+</html>
