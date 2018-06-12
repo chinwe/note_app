@@ -13,10 +13,11 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     body = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, default=datetime.now())
-    def __init__(self, title, body):
+    timestamp = db.Column(db.DateTime)
+    def __init__(self, title, body, timestamp):
         self.title = title
         self.body = body
+        self.timestamp = timestamp
 
 @app.route("/")
 def home():
@@ -29,8 +30,9 @@ def create_note():
         else:
             title = request.form["title"]
             body = request.form["body"]
+            timestamp = datetime.now()
 
-            note = Note(title=title, body=body)
+            note = Note(title=title, body=body, timestamp=timestamp)
 
             db.session.add(note)
             db.session.commit()
